@@ -8,11 +8,6 @@ def creator_home():
     return render_template("creator_home.html")
 
 
-@creator_bp.route("/creator/posts")
-def creator_posts():
-    return render_template("posts/creator_posts.html")
-
-
 @creator_bp.route("/creator/posts/new")
 def create_new_post():
     return render_template("posts/creator_new_post.html")
