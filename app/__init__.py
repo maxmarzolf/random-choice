@@ -24,4 +24,8 @@ def create_app():
 
         from app import models
 
+        # db.create_all()
+        # create a separate file that will drop all and create all tables
+        # also, ensure that the logic adds a few pieces of test data?
+
         return app

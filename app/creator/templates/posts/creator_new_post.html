@@ -1,1 +1,24 @@
 <h1>CREATOR NEW POST TEMPLATE</h1>
+
+<form action="" method="POST">
+
+    {{ form.csrf_token() }}
+
+    {{ form.title.label }}
+    {{ form.title }}
+
+    {{ form.subtitle.label }}
+    {{ form.subtitle }}
+
+    {{ form.content.label }}
+    {{ form.content }}
+
+    {{ form.date.label }}
+    {{ form.date }}
+
+    {{ form.archive.label }}
+    {{ form.archive }}
+
+    <button type="submit">Post</button>
+
+</form>
