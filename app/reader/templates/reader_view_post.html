@@ -1,5 +1,15 @@
-<h1>{{ post.post_title }}</h1>
-<p>{{ post.post_subtitle }}</p>
+{% extends "shared/template.html" %}
 
-<p>{{ post.post_date }}</p>
-<textarea>{{ post.post_content }}</textarea>
+{% block left_nav %}
+    {% with other_posts=other_posts %}
+        {% include "posts_list.html" %}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+<h1 id="post_title">{{ post.post_title }}</h1>
+<h2 id="post_subtitle">{{ post.post_subtitle }}</h2>
+
+<p id="post_date">{{ post.post_date }}</p>
+<p id="post_content">{{ post.post_content }}</p>
+{% endblock %}

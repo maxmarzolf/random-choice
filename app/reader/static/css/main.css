@@ -1,0 +1,101 @@
+/* RESET */
+/* Courtesy Alligator.io (https://alligator.io/css/minimal-css-reset/) */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* LAYOUT */
+body {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 100px auto;
+    grid-template-areas:
+    "h h h h h h h h h h h h"
+    "l l l c c c c c c c c c";
+}
+
+#header {
+    grid-area: h;
+}
+
+#left_nav {
+    grid-area: l;
+    margin: 3rem 0 3rem 3rem;
+}
+
+#content {
+    grid-area: c;
+    margin: 3rem;
+}
+
+/* GENERAL STYLES */
+body {
+    background-color: #FAFAFA;
+    font-family: "Work Sans", sans-serif;
+}
+
+h1 {
+    font-size: 2.2em;
+}
+
+/* HEADER */
+#header_container {
+    align-items: center;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #24242344;
+    color: #242423;
+    display: flex;
+    font-family: "Space Mono", monospace;
+    justify-content: center;
+    height: 100px;
+    padding: 1.2rem 2rem;    
+}
+
+#header_brand {
+    text-align: center;
+}
+
+/* CONTENT */
+#content {
+    
+}
+
+#post_title {
+}
+
+#post_subtitle {
+    font-weight: 300;
+}
+
+#post_date {
+    font-weight: 300;
+    font-style: italic;
+}
+
+#post_content {
+    padding-top: 2rem;
+}
+
+/* FOOTER */
