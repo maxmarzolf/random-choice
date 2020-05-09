@@ -26,11 +26,9 @@ img {
 
 /* LAYOUT */
 body {
-    height: 100vh;
-    width: 100vw;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 100px auto;
+    grid-template-rows: 100px minmax(auto, 1fr);
     grid-template-areas:
     "h h h h h h h h h h h h"
     "l l l c c c c c c c c c";
@@ -46,18 +44,40 @@ body {
 }
 
 #content {
+    box-sizing: border-box;
     grid-area: c;
-    margin: 3rem;
+    padding: 3rem;
 }
 
 /* GENERAL STYLES */
 body {
     background-color: #FAFAFA;
     font-family: "Work Sans", sans-serif;
+    box-sizing: border-box;
 }
 
 h1 {
-    font-size: 2.2em;
+    font-size: 2.3em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.7em;
+}
+
+h4 {
+    font-size: 1.5em;
+}
+
+h5 {
+    font-size: 1.3em;
+}
+
+h6 {
+    font-size: 1.1em;
 }
 
 /* HEADER */
@@ -96,6 +116,10 @@ h1 {
 
 #post_content {
     padding-top: 2rem;
+}
+
+.post_preview {
+    margin-bottom: 2rem;
 }
 
 /* FOOTER */

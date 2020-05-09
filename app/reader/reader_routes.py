@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from sqlalchemy import func
+from sqlalchemy import func, desc
 
 from . import reader_bp
 from app import db, models
@@ -7,7 +7,8 @@ from app import db, models
 
 @reader_bp.route("/")
 def reader_home():
-    return "reader home!"
+    posts = models.Post.query.order_by(desc(models.Post.post_date)).limit(4)
+    return render_template("home.html", posts=posts)
 
 
 @reader_bp.route("/post/<int:post_id>")

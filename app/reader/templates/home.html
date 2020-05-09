@@ -1,0 +1,10 @@
+{% extends "shared/template.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}   
+    <h1>The Latest</h1>
+
+    {% for p in posts %}
+        {{ macros.post_preview(p.post_id, p.post_title, p.post_subtitle, p.post_date, p.post_content) }}
+    {% endfor %}
+{% endblock %}

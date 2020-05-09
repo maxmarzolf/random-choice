@@ -1,0 +1,8 @@
+{% macro post_preview(post_id, post_title, post_subtitle, post_date, post_content) %}
+    <div class="post_preview">
+        <h3><a href="{{ url_for('reader_bp.read_post', post_id=post_id) }}">{{ post_title }}</a></h3>
+        <p>{{ post_subtitle }}</p>
+        <p>{{ post_date }}</p>
+        <p>{{ post_content|truncate(500, True, "...", 3) }}</p>
+    </div>
+{% endmacro %}
