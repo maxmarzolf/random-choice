@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameter_Blog</title>
+    <!--{{ url_for('static', filename='css/main.css') }}-->
+
+    <link href="{{ url_for('.static', filename='css/main.css') }}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700|Work+Sans:300,300i,400,400i,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="header">
+        {% block header %}
+            {% include "partials/header.html" %}
+        {% endblock %}
+    </div>
+
+    <div id="left_gutter"></div>
+
+    <div id="content_container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="right_gutter"></div>
+    
+</body>
+</html>

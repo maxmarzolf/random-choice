@@ -31,15 +31,15 @@ body {
     grid-template-rows: 100px minmax(auto, 1fr);
     grid-template-areas:
     "h h h h h h h h h h h h"
-    "l l l c c c c c c c c c";
+    "lg c c c c c c c c c c rg";
 }
 
 #header {
     grid-area: h;
 }
 
-#left_nav {
-    grid-area: l;
+#left_gutter {
+    grid-area: lg;
     margin: 3rem 0 3rem 3rem;
 }
 
@@ -47,6 +47,11 @@ body {
     box-sizing: border-box;
     grid-area: c;
     padding: 3rem;
+}
+
+#right_gutter {
+    grid-area: rg;
+    margin: 3rem 0 3rem 3rem;
 }
 
 /* GENERAL STYLES */
@@ -95,6 +100,7 @@ h6 {
 
 #header_brand {
     text-align: center;
+    text-decoration: none;
 }
 
 /* CONTENT */
