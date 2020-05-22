@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -33,7 +35,6 @@ class Post(db.Model):
         post = Post.query.filter_by(post_id=post_id).first()
 
         return post
-        
 
     def __repr__(self):
         return "<Post: {}>".format(self.post_title)

@@ -5,3 +5,5 @@ reader_bp = Blueprint("reader_bp", __name__, static_folder="static", static_url_
 
 
 from . import reader_routes
+
+from . import filters
