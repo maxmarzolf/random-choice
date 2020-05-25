@@ -1,8 +1,8 @@
 from flask import Flask, Blueprint
 
 
-reader_bp = Blueprint("reader_bp", __name__, static_folder="static", static_url_path="/reader_bp/static/", template_folder="templates")
-
+reader_bp = Blueprint("reader_bp", __name__, static_folder="app.static", template_folder="app.templates")
+print(f"Reader __init__: {__name__}")
 
 from . import reader_routes
 

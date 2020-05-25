@@ -8,7 +8,7 @@ from app import db, models
 @reader_bp.route("/")
 def reader_home():
     posts = models.Post.query.order_by(desc(models.Post.post_date)).limit(4)
-    return render_template("home.html", posts=posts)
+    return render_template("reader/home.html", posts=posts)
 
 
 @reader_bp.route("/post/<int:post_id>")
@@ -19,4 +19,4 @@ def read_post(post_id):
     print(other_posts)
     print(post)
 
-    return render_template("reader_view_post.html", post=post, other_posts=other_posts)
+    return render_template("reader/reader_view_post.html", post=post, other_posts=other_posts)

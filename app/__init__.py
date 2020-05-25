@@ -9,7 +9,8 @@ migrate = Migrate()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object('config.Config')
+    print(f"App __init__: {__name__}")
+    app.config.from_object('config.ConfigDev')
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -21,8 +22,6 @@ def create_app(test_config=None):
 
         from . import reader
         app.register_blueprint(reader.reader_bp)
-
-        from app import models
 
         # db.create_all()
         # create a separate file that will drop all and create all tables

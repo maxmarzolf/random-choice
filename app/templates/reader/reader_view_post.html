@@ -1,8 +1,8 @@
-{% extends "layouts/post_template.html" %}
+{% extends "shared/post_template.html" %}
 
 {% block left_nav %}
     {% with other_posts=other_posts %}
-        {% include "partials/posts_list.html" %}
+        {% include "reader/posts_list.html" %}
     {% endwith %}
 {% endblock %}
 
