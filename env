@@ -1,0 +1,2 @@
+DATABASE_URL=sqlite:///app.db
+SECRET_KEY=OYjYvT2hkjZpHzDoGgNGdXyhmOOm1bsw

@@ -6,7 +6,7 @@ from app import db, models
 
 @reader_bp.route("/")
 def reader_home():
-    return "reader home!"
+    return render_template("creator_home.html")
 
 
 @reader_bp.route("/post/<int:post_id>")
