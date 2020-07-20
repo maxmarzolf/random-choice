@@ -11,5 +11,5 @@
 <h2 id="post_subtitle">{{ post.post_subtitle }}</h2>
 
 <p id="post_date">{{ post.post_date|display_date() }}</p>
-<p id="post_content">{{ post.post_content }}</p>
+<p id="post_content">{{ post.post_content|safe }}</p>
 {% endblock %}
