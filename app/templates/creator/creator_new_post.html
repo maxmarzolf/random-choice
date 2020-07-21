@@ -23,4 +23,18 @@
     <button class="btn" type="submit">Post</button>
 
 </form>
+
+<div id="md_preview_container"></div>
+
+<button id="preview_md" type="button">Preview</button>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    const preview_md_button = document.querySelector('#preview_md');
+
+    preview_md_button.addEventListener('click', event=> {
+        console.log('preview md');
+        document.querySelector('#md_preview_container').innerHTML = marked(document.querySelector('#content').value);
+    });
+</script>
 {% endblock %}
