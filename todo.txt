@@ -1,0 +1,9 @@
+using flask-migrate:
+- if you are using flask-migrate for the first time, set the head of the migration first:
+    flask db stamp head
+
+- create the migration file:
+    flask db migrate
+
+- update the db:
+    flask db upgrade

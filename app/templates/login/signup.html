@@ -1,0 +1,18 @@
+{% extends "shared/template.html" %}
+
+{% block content %}
+
+    <h3>Sign Up</h3>
+    <form action="" method="POST">
+        {{ form.csrf_token() }}
+
+        <label>{{ form.email.label(class_="label") }}</label>
+        {{ form.email(class_="post_title input") }}
+
+        <label>{{ form.password.label(class_="label") }}</label>
+        {{ form.password(class_="post_title input") }}
+
+        <button class="btn" type="submit">Create Account</button>
+    </form>
+
+{% endblock %}

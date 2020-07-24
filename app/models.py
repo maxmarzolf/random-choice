@@ -4,6 +4,18 @@ from app import db
 
 
 # USER MODELS
+class User(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    user_email = db.Column(db.String(120), nullable=False)
+    user_password = db.Column(db.String(200), nullable=False)
+
+
+# WRITER MODELS
+class Writer(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    writer_user_id = db.Column(db.Integer(), db.ForeignKey(User.id), nullable=False) # foreign key ref too
+    writer_about_me = db.Column(db.String(200))
+    writer_short_summary = db.Column(db.String(40))
 
 
 # POST MODELS
