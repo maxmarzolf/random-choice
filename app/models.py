@@ -1,10 +1,11 @@
 from datetime import datetime
+from flask_login import UserMixin
 
 from app import db
 
 
 # USER MODELS
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     user_email = db.Column(db.String(120), nullable=False)
     user_password = db.Column(db.String(200), nullable=False)

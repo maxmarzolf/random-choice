@@ -18,3 +18,8 @@ class PostForm(FlaskForm):
 class SignupForm(FlaskForm):
     email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
     password = PasswordField("Password", validators=[InputRequired()])
+
+
+class LoginForm(FlaskForm):
+    email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
+    password = PasswordField("Password", validators=[InputRequired()])
