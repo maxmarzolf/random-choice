@@ -4,8 +4,7 @@
 
 .main_content{
     padding: 20px;
-    margin: auto;
-    margin-top: 25px;
+    margin: 25px auto auto;
     text-align: center;
     border: 2px solid black;
     width: 800px;
