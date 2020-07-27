@@ -4,7 +4,12 @@
 {% block content %}   
     <h1>The Latest</h1>
 
-    {% for p in posts %}
-        {{ macros.post_preview(p.post_id, p.post_title, p.post_subtitle, p.post_date, p.post_content) }}
-    {% endfor %}
+    {% if posts %}
+        {% for p in posts %}
+            {{ macros.post_preview(p["post_id"], p["post_title"], p["post_subtitle"], p["post_date"], p["post_content"]) }}
+        {% endfor %}
+    {% else %}
+        <p>No posts to show!</p>
+    {% endif %}
+    
 {% endblock %}
