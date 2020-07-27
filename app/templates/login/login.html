@@ -1,0 +1,25 @@
+{% extends "shared/template.html" %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="" method="POST">
+        {{ form.csrf_token() }}
+
+        <label>{{ form.email.label(class_="label") }}</label>
+        {{ form.email(class_="post_title input") }}
+
+        <label>{{ form.password.label(class_="label") }}</label>
+        {{ form.password(class_="post_title input") }}
+
+        <button class="btn" type="submit">Login</button>
+    </form>
+
+{% endblock %}

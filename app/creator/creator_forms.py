@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, BooleanField
+from wtforms import StringField, TextAreaField, BooleanField, PasswordField
+from wtforms.fields.html5 import EmailField
 from wtforms.ext.dateutil.fields import DateTimeField
-from wtforms.validators import InputRequired, Length, Optional
+from wtforms.validators import InputRequired, Length, Optional, Email
 
 
 class PostForm(FlaskForm):
@@ -13,3 +14,12 @@ class PostForm(FlaskForm):
 
 # does there need to be 2 separate forms for a form? can auto-populate be toggled?
 # create post form
+
+class SignupForm(FlaskForm):
+    email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
+    password = PasswordField("Password", validators=[InputRequired()])
+
+
+class LoginForm(FlaskForm):
+    email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
+    password = PasswordField("Password", validators=[InputRequired()])
