@@ -7,3 +7,15 @@ using flask-migrate:
 
 - update the db:
     flask db upgrade
+
+
+GIT:
+Push branch to remote: git push --set-upstream origin <local_branch_name>
+
+Delete branch locally & in remote: git branch -d <local_branch_name> && git push origin --delete <remote_branch_name>
+
+
+User:
+Separate tables: Auth & User so that passwords can be updated separately from the rest of info
+Auth: email/password
+User: subtitle, about, website, FK -> Auth

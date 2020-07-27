@@ -13,7 +13,6 @@ login_manager = LoginManager()
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=False)
-    print(f"App __init__: {__name__}")
     app.config.from_object('config.ConfigDev')
 
     db.init_app(app)
