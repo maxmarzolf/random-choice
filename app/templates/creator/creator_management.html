@@ -1,0 +1,28 @@
+{% extends "shared/template.html" %}
+
+{% block content %}
+
+    <h3>Account Management</h3>
+
+    <form action="" method="POST">
+        {{ form.csrf_token() }}
+
+        <label>{{ form.email.label(class_="label") }}</label>
+        {{ form.email(class_="post_title input", readonly=true) }}
+
+        <label>{{ form.password.label(class_="label") }}</label>
+        {{ form.password(class_="post_title input", readonly=true) }}
+
+        <label>{{ form.subtitle.label(class_="label") }}</label>
+        {{ form.subtitle(class_="post_title input") }}
+
+        <label>{{ form.about.label(class_="label") }}</label>
+        {{ form.about(class_="post_title input") }}
+
+        <label>{{ form.website.label(class_="label") }}</label>
+        {{ form.website(class_="post_title input") }}
+
+        <button type="submit" class="btn">Update</button>
+    </form>
+
+{% endblock %}

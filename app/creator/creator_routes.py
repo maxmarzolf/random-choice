@@ -30,6 +30,30 @@ def creator_edit_post(post_id):
     return render_template("creator/creator_edit_post.html", post=post_id)
 
 
+@creator_bp.route("/creator/manage", methods=["GET", "POST"])
+@login_required
+def creator_manager():
+    user_data = {"email":current_user.user_email, "password":"********", "about":current_user.user_about, "subtitle":current_user.user_subtitle, "website":current_user.user_website}
+    print(user_data)
+    print(current_user)
+    form = creator_forms.UserManagementForm(data=user_data)
+
+    if request.method == "POST":
+        updated_user = models.User.query.get(current_user.id)
+        # update attributes
+        updated_user.user_email = current_user.user_email
+        updated_user.user_password = current_user.user_password
+        updated_user.user_subtitle = request.form["subtitle"]
+        updated_user.user_about = request.form["about"]
+        updated_user.user_website = request.form["website"]
+
+        db.session.commit()
+
+        return redirect(url_for("creator_bp.creator_home"))
+
+    return render_template("creator/creator_management.html", form=form)
+
+
 @creator_bp.route("/signup", methods=["GET", "POST"])
 def signup():
     form = creator_forms.SignupForm()
@@ -74,7 +98,7 @@ def login():
             if user and bcrypt.check_password_hash(user.user_password, form.password.data):
                 login_user(user)
 
-        return render_template("creator/creator_home.html")
+        return redirect(url_for("creator_bp.creator_home"))
 
     return render_template("login/login.html", form=form)
 
