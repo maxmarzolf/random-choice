@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin
 
-from app import db
+from app import db, bcrypt
 
 
 # USER MODELS
@@ -12,6 +12,15 @@ class User(db.Model, UserMixin):
     user_about = db.Column(db.String(200))
     user_subtitle = db.Column(db.String(40))
     user_website = db.Column(db.String(200))
+
+    def create_new_password(self, form_password_plaintext):
+        bcrypt.generate_password_hash(form_password_plaintext)
+
+    def verify_password(self, form_password):
+        return bcrypt.check_password_hash(self.user_password, form_password)
+
+    def __repr__(self):
+        return f'{self.user_email}'
 
 
 # POST MODELS

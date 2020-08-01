@@ -15,19 +15,3 @@ class PostForm(FlaskForm):
 # does there need to be 2 separate forms for a form? can auto-populate be toggled?
 # create post form
 
-class SignupForm(FlaskForm):
-    email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
-    password = PasswordField("Password", validators=[InputRequired()])
-
-
-class LoginForm(FlaskForm):
-    email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
-    password = PasswordField("Password", validators=[InputRequired()])
-
-
-class UserManagementForm(FlaskForm):
-    email = EmailField("Email")
-    password = PasswordField("Password")
-    about = TextAreaField("About", validators=[Length(max=200), Optional()])
-    subtitle = StringField("Subtitle", validators=[Length(max=40), Optional()])
-    website = StringField("Website", validators=[Length(max=200), Optional()])
