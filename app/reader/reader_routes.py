@@ -3,7 +3,7 @@ from sqlalchemy import func, desc
 import marko
 
 from . import reader_bp
-from app import db, models
+from app import db, models, login_manager
 
 
 @reader_bp.route("/")

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
@@ -27,6 +27,22 @@ def create_app(test_config=None):
 
         from . import reader
         app.register_blueprint(reader.reader_bp)
+
+        from . import account
+        app.register_blueprint(account.account_bp)
+
+        @login_manager.user_loader
+        def load_user(user_id):
+            if user_id is not None:
+                return models.User.query.get(user_id)
+            
+            return Non
+        
+        @login_manager.unauthorized_handler
+        def unauthorized():
+            flash("You must log in to view that page.")
+
+            return redirect(url_for('account_bp.login'))
 
         # db.create_all()
         # create a separate file that will drop all and create all tables

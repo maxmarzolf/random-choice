@@ -1,7 +1,11 @@
-<h1>Welcome to Your Command Centre</h1>
+{% extends "shared/template.html" %}
 
-<h3>Your Account</h3>
+{% block content %}
+    <h1>Welcome to Your Command Centre</h1>
 
-<h3>Your Posts</h3>
-<p><a href="{{ url_for('creator_bp.creator_manager') }}">Manage</a></p>
-<a href="">New Post</a>
+    <h3>Your Account</h3>
+
+    <h3>Your Posts</h3>
+    <p><a href="{{ url_for('account_bp.manage_account') }}">Manage</a></p>
+    <a href="">New Post</a>
+{% endblock %}
