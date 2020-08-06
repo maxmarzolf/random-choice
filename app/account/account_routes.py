@@ -60,10 +60,8 @@ def login():
             else:
                 print("next is not in session")
                 return redirect(url_for("creator_bp.home"))
-            # if is_safe_url(request.args.get("next")) and request.args.get("next") is not None:
-            #     return redirect(request.args.get("next"))
-            # else:
-            #     redirect(url_for("creator_bp.home"))
+        else:
+            flash("Please enter a valid user name and password.")
 
     return render_template("account/login.html", form=form, current_user=current_user.__repr__())
 
@@ -76,7 +74,7 @@ def logout():
     return redirect(url_for("account_bp.login"))
 
 
-@account_bp.route("/account/manage", methods=["GET", "POST"])
+@account_bp.route("/me/manage", methods=["GET", "POST"])
 @login_required
 def manage_account():
     user_data = {"about":current_user.about, "subtitle":current_user.subtitle, "website":current_user.website, "name":current_user.name}
@@ -98,7 +96,7 @@ def manage_account():
     return render_template("account/manage.html", form=form, current_user=current_user.__repr__())
 
 
-@account_bp.route("/account/password", methods=["GET", "POST"])
+@account_bp.route("/me/password", methods=["GET", "POST"])
 @fresh_login_required
 def change_password():
     form = account_forms.ChangePasswordForm()
