@@ -14,8 +14,11 @@ class LoginForm(FlaskForm):
 
 
 class UserManagementForm(FlaskForm):
-    email = EmailField("Email")
-    password = PasswordField("Password")
+    name = StringField("Name", validators=[Length(max=150), Optional()])
     about = TextAreaField("About", validators=[Length(max=200), Optional()])
     subtitle = StringField("Subtitle", validators=[Length(max=40), Optional()])
     website = StringField("Website", validators=[Length(max=200), Optional()])
+
+
+class ChangePasswordForm(FlaskForm):
+    password = PasswordField("Password")

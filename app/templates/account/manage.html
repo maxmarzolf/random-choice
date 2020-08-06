@@ -7,11 +7,8 @@
     <form action="" method="POST">
         {{ form.csrf_token() }}
 
-        <label>{{ form.email.label(class_="label") }}</label>
-        {{ form.email(class_="post_title input", readonly=true) }}
-
-        <label>{{ form.password.label(class_="label") }}</label>
-        {{ form.password(class_="post_title input", readonly=true) }}
+        <label>{{ form.name.label(class="label") }}</label>
+        {{ form.name(class_="post_title input") }}
 
         <label>{{ form.subtitle.label(class_="label") }}</label>
         {{ form.subtitle(class_="post_title input") }}
