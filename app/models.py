@@ -7,20 +7,24 @@ from app import db, bcrypt
 # USER MODELS
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
-    user_email = db.Column(db.String(120), nullable=False)
-    user_password = db.Column(db.String(200), nullable=False)
-    user_about = db.Column(db.String(200))
-    user_subtitle = db.Column(db.String(40))
-    user_website = db.Column(db.String(200))
+    name = db.Column(db.String(150))
+    email = db.Column(db.String(120), nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+    about = db.Column(db.String(200))
+    subtitle = db.Column(db.String(40))
+    website = db.Column(db.String(200))
 
     def create_new_password(self, form_password_plaintext):
-        bcrypt.generate_password_hash(form_password_plaintext)
+        return bcrypt.generate_password_hash(form_password_plaintext).decode("utf-8")
 
     def verify_password(self, form_password):
-        return bcrypt.check_password_hash(self.user_password, form_password)
+        return bcrypt.check_password_hash(self.password, form_password)
+    
+    def check_passwords_match(self, form_password):
+        pass
 
     def __repr__(self):
-        return f'{self.user_email}'
+        return f'{self.email}'
 
 
 # POST MODELS
