@@ -1,1 +1,1 @@
-web: gunicorn app:forest_blog
+web: gunicorn app:app
