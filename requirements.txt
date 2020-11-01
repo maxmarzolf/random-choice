@@ -33,6 +33,7 @@ pluggy==0.13.1
 py==1.8.1
 pycparser==2.20
 Pygments==2.6.1
+pyodbc==4.0.30
 pyparsing==2.4.7
 pyquery==1.4.1
 pytest==5.4.2

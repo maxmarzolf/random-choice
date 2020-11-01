@@ -7,7 +7,8 @@ from app import db, bcrypt
 # USER MODELS
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
-    name = db.Column(db.String(150))
+    first_name = db.Column(db.String(150))
+    last_name = db.Column(db.String(150))
     email = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     about = db.Column(db.String(200))
