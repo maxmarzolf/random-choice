@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     about = db.Column(db.String(200))
     subtitle = db.Column(db.String(40))
     website = db.Column(db.String(200))
+    created = db.Column(db.DateTime(), default=datetime.now)
 
     def create_new_password(self, form_password_plaintext):
         return bcrypt.generate_password_hash(form_password_plaintext).decode("utf-8")
