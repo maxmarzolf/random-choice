@@ -87,10 +87,11 @@ h6 {
     border-bottom: 1px solid #24242344;
     color: #242423;
     display: flex;
-    font-family: Calibri, sans-serif;
+    font-family: 'Trispace', sans-serif;
     justify-content: center;
     height: 100px;
-    padding: 1.2rem 2rem;    
+    padding: 1.2rem 2rem;
+    text-decoration: none;
 }
 
 #header_brand {
