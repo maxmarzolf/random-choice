@@ -52,9 +52,19 @@ posts = [
     Post(
         post_title='Post Title 2',
         post_subtitle='Post 2 Subtitle',
-        post_content='# Post 2 Content ## Post 2 subheader',
+        post_content='# Post 2 Content \n## Post 2 subheader',
         post_was_edited=True,
         post_archived=True
+    ),
+    Post(
+        post_title='Post Title 3',
+        post_subtitle='Post 3 Subtitle',
+        post_content=("# Post 3 Section Header\n"
+        "## Post 3 Section Subheader\n"
+        "+ first item\n"
+        "+ second item\n"
+        "+ third item\n\n" # blank line separates the list from the paragraph
+        "And some paragraph text.")
     )
 ]
 
