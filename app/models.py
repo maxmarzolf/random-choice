@@ -30,15 +30,17 @@ class User(db.Model, UserMixin):
 
 
 # POST MODELS
-class Post(db.Model):
-    post_id = db.Column(db.Integer(), primary_key=True)
-    author_id = db.Column(db.Integer())
-    post_title = db.Column(db.String(length=200))
-    post_subtitle = db.Column(db.String(length=300))
-    post_content = db.Column(db.Text())
-    post_date = db.Column(db.DateTime())
-    post_was_edited = db.Column(db.Boolean())
-    post_archived = db.Column(db.Boolean())
+class Article(db.Model):
+    __tablename__ = 'ARTICLE'
+    ID = db.Column(db.Integer(), primary_key=True)
+    AUTHOR = db.Column(db.Integer(), db.ForeignKey('user.id'))
+    TITLE = db.Column(db.String(length=200), nullable=False)
+    SUBTITLE = db.Column(db.String(length=300), nullable=True)
+    CONTENT_MARKDOWN = db.Column(db.Text(), nullable=True)
+    CONTENT_HTML = db.Column(db.Text(), nullable=True)
+    POSTED_DATE = db.Column(db.DateTime(), nullable=False, default=datetime.now)
+    EDITED = db.Column(db.Boolean(), nullable=False, default=False)
+    ARCHIVED = db.Column(db.Boolean(), nullable=False, default=False)
 
     @classmethod
     def insert_post(cls, post_form):
