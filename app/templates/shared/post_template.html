@@ -24,9 +24,9 @@
     </div>
 
     <div id="content_container">
-        {% for p in current_user %}
-            </span>{{ p }}</span>
-        {% endfor %}
+        {% if current_user %}
+            </span>Hi, {{ current_user.first_name }}</span>
+        {% endif %}
         {% block content %}
         {% endblock %}
     </div>

@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask_login import UserMixin
+from sqlalchemy import func
 
 from app import db, bcrypt
 
@@ -43,23 +44,32 @@ class Article(db.Model):
     ARCHIVED = db.Column(db.Boolean(), nullable=False, default=False)
 
     @classmethod
-    def insert_post(cls, post_form):
+    def insert_article(cls, post_form):
         # should probably not presume the data is ok at this point but for now, we will
         # will need to add additional logic here later to ensure that the post object is correct
 
         # create the Post object from the PostForm object
-        new_post = cls(post_title=post_form.title.data, post_subtitle=post_form.subtitle.data,
-        post_content=post_form.content.data, post_date=post_form.date.data, post_archived=post_form.archive.data)
-
-        print(new_post)        
-        db.session.add(new_post)
+        new_article = cls(TITLE=post_form.title.data, SUBTITLE=post_form.subtitle.data,
+        CONTENT=post_form.content.data, POSTED_DATE=post_form.date.data, ARCHIVED=post_form.archive.data)
+        
+        print(new_article)        
+        db.session.add(new_article)
         db.session.commit()
     
-    @staticmethod
-    def _get_post(post_id):
-        post = Post.query.filter_by(post_id=post_id).first()
+    @classmethod
+    def get_article(cls, post_id):
+        article = cls.query.filter_by(ID=post_id).first()
 
-        return post
+        return article
+    
+    @classmethod
+    def get_random_articles(cls, numberOfArticles, doNotInclude=''):  
+        if doNotInclude:
+            articles = cls.query.filter(ID != doNotInclude).order_by(func.rand()).limit(numberOfArticles)
+        else:
+            articles = cls.query.order_by(func.rand()).limit(numberOfArticles)
+        
+        return articles
 
     def __repr__(self):
-        return "<Post: {}>".format(self.post_title)
+        return "<Post: {}>".format(self.TITLE)
