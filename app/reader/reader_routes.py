@@ -8,6 +8,7 @@ from app import db, models, login_manager
 
 @reader_bp.route("/")
 def reader_home():
+
     #posts_from_db = models.Post.query.order_by(desc(models.Post.post_date)).limit(4)
     posts_from_db = models.Article.get_random_articles(4)
     print(posts_from_db)
@@ -33,7 +34,7 @@ def read_post(post_id):
     post_from_db = models.Article.get_article(post_id)
     #other_posts = models.Article.query.filter(models.Post.post_id != post_from_db.post_id).order_by(func.random()).limit(5)
     other_posts = models.Article.get_random_articles(5)
-    
+
     post = {}
     post["post_id"] = post_from_db.ID
     post["post_title"] = post_from_db.TITLE
