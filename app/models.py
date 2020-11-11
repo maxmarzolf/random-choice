@@ -5,32 +5,34 @@ from sqlalchemy import func
 from app import db, bcrypt
 
 
-# USER MODELS
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer(), primary_key=True)
-    first_name = db.Column(db.String(150))
-    last_name = db.Column(db.String(150))
-    email = db.Column(db.String(120), nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    about = db.Column(db.String(200))
-    subtitle = db.Column(db.String(40))
-    website = db.Column(db.String(200))
-    created = db.Column(db.DateTime(), default=datetime.now)
+    __tablename__ = 'USER'
+    ID = db.Column(db.Integer(), primary_key=True)
+    NAME = db.Column(db.String(150))
+    EMAIL = db.Column(db.String(120), nullable=False)
+    PASSWORD = db.Column(db.String(200), nullable=False)
+    ABOUT = db.Column(db.String(100))
+    PERSONAL_WEBSITE = db.Column(db.String(200))
+    CREATED = db.Column(db.DateTime(), default=datetime.now)
+    CLOSED = db.Column(db.Boolean(), default=False)
 
-    def create_new_password(self, form_password_plaintext):
+    @staticmethod
+    def create_new_password(form_password_plaintext):
         return bcrypt.generate_password_hash(form_password_plaintext).decode("utf-8")
 
-    def verify_password(self, form_password):
-        return bcrypt.check_password_hash(self.password, form_password)
+    @classmethod
+    def verify_password(user_id, form_password):
+        # update this to pass the user_id, get user password hash, and compare the form password
+        # return bcrypt.check_password_hash(self.PASSWORD, form_password)
     
-    def check_passwords_match(self, form_password):
+    @staticmethod
+    def check_passwords_match(form_password):
         pass
 
     def __repr__(self):
-        return f'{self.email}'
+        return f'{self.EMAIL} ({self.ID}, {self.NAME}, {self.CLOSED})'
 
 
-# POST MODELS
 class Article(db.Model):
     __tablename__ = 'ARTICLE'
     ID = db.Column(db.Integer(), primary_key=True)
@@ -45,9 +47,6 @@ class Article(db.Model):
 
     @classmethod
     def insert_article(cls, post_form):
-        # should probably not presume the data is ok at this point but for now, we will
-        # will need to add additional logic here later to ensure that the post object is correct
-
         # create the Post object from the PostForm object
         new_article = cls(TITLE=post_form.title.data, SUBTITLE=post_form.subtitle.data,
         CONTENT=post_form.content.data, POSTED_DATE=post_form.date.data, ARCHIVED=post_form.archive.data)
@@ -72,4 +71,4 @@ class Article(db.Model):
         return articles
 
     def __repr__(self):
-        return "<Post: {}>".format(self.TITLE)
+        return f'Post: "{self.TITLE}" ({self.ID}, {self.AUTHOR}, {self.POSTED_DATE})'
