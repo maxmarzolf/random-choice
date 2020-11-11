@@ -1,5 +1,5 @@
 <h3>Other Posts:</h3>
 
 {% for p in other_posts %}
-    <p><a href="{{ url_for('reader_bp.read_post', post_id=p.post_id) }}">{{ p.post_title|truncate(60, False, "...") }}</a></p>
+    <p><a href="{{ url_for('reader_bp.read_post', post_id=p.ID) }}">{{ p.TITLE|truncate(60, False, "...") }}</a></p>
 {% endfor %}
