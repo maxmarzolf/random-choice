@@ -77,15 +77,6 @@ def manage_account():
     form = account_forms.UserManagementForm(data=user_data)
 
     if request.method == "POST":
-        # updated_user = models.User.get_user(current_user.id)
-        
-        # updated_user.name = form.name.data
-        # updated_user.about = form.about.data
-        # updated_user.website = form.website.data
-        print(dir(form))
-        
-
-        # db.session.commit()
         updated_user = {"id": current_user.id, "about": form.about.data, "name": form.name.data, "personal_website": form.website.data}
 
         models.User.update_user(updated_user)
@@ -101,12 +92,7 @@ def change_password():
     form = account_forms.ChangePasswordForm()
 
     if form.validate_on_submit():
-        hashed_pw = current_user.create_new_password(form.password.data)
-
-        updated_user = models.User.query.get(current_user.id)
-        updated_user.password = hashed_pw
-
-        db.session.commit()
+        models.User.update_password(user_id=current_user.id, old_password=form.old_password.data, new_password=form.new_password.data)
 
         return redirect(url_for("creator_bp.home"))
 

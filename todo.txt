@@ -17,6 +17,8 @@ Delete branch locally & in remote: git branch -d <local_branch_name> && git push
 Remove pyodbc
 Add a Go To Random Article feature
 
+change password to take in old and new instead of just the new one
+
 Auth:
 - login
     > proper try/except

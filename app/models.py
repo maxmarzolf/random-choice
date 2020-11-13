@@ -28,12 +28,16 @@ class User(db.Model, UserMixin):
 
     @classmethod
     def update_user(cls, user):
-        # id, about, name, personal_website
-        #_id, *_data = user.items() # this is less secure, potentially, because it allows some other values to be snuck into the tuple
         _user_data = {"about": user["about"], "name": user["name"], "personal_website": user["personal_website"]}
         cls.query.filter_by(id=user["id"]).update(_user_data)
         db.session.commit()
-        #return true
+    
+    @classmethod
+    def update_password(cls, user_id, old_password, new_password):
+        user = cls.query.filter_by(id=user_id).first()
+        if bcrypt.check_password_hash(user.password, old_password):
+            cls.query.filter_by(id=user_id).update({"password": cls._create_new_password(new_password)})
+            db.session.commit()
 
     @classmethod
     def create_new_user(cls, user_email, user_password_plaintext):
@@ -48,14 +52,8 @@ class User(db.Model, UserMixin):
 
     @classmethod
     def verify_password(cls, user_id, form_password):
-        # update this to pass the user_id, get user password hash, and compare the form password
-        # return bcrypt.check_password_hash(self.PASSWORD, form_password)
         user = cls.query.filter_by(id=user_id).first()
         return bcrypt.check_password_hash(user.password, form_password)
-    
-    @staticmethod
-    def check_passwords_match(form_password):        
-        pass
 
     def __repr__(self):
         return f'{self.email} ({self.id}, {self.name}, {self.closed})'
@@ -75,7 +73,6 @@ class Article(db.Model):
 
     @classmethod
     def insert_article(cls, post_form):
-        # create the Post object from the PostForm object
         new_article = cls(title=post_form.title.data, subtitle=post_form.subtitle.data,
         content=post_form.content.data, posted_date=post_form.date.data, archived=post_form.archive.data)
         
