@@ -17,13 +17,8 @@ def signup():
     form = account_forms.SignupForm()
 
     if request.method == "POST":
-        print(form.password.data)
-        new_user = models.User(email=request.form["email"])
-        hashed_pw = new_user.create_new_password(form_password_plaintext=form.password.data)
-        new_user.password = hashed_pw
-        
-        db.session.add(new_user)
-        db.session.commit()
+        # proper try/except here.
+        models.User.create_new_user(form.email.data, form.password.data)
 
         return redirect(url_for("reader_bp.reader_home"))
 
@@ -39,9 +34,9 @@ def login():
         # if current_user.is_authenticated:
         #     return redirect(url_for("creator_bp.home"))
                 
-        user = models.User.query.filter_by(email=form.email.data).first()
+        user = models.User.get_user_by_email(form.email.data)
 
-        if user and user.verify_password(form.password.data):
+        if user and user.verify_password(user.id, form.password.data):
             login_user(user, duration=timedelta(minutes=1), remember=True)
             print(session)
 
@@ -77,19 +72,23 @@ def logout():
 @account_bp.route("/me/manage", methods=["GET", "POST"])
 @login_required
 def manage_account():
-    user_data = {"about":current_user.about, "subtitle":current_user.subtitle, "website":current_user.website, "name":current_user.name}
+    user_data = {"about":current_user.about, "website":current_user.personal_website, "name":current_user.name}
     print(session)
     form = account_forms.UserManagementForm(data=user_data)
 
     if request.method == "POST":
-        updated_user = models.User.query.get(current_user.id)
+        # updated_user = models.User.get_user(current_user.id)
         
-        updated_user.name = form.name.data
-        updated_user.subtitle = form.subtitle.data
-        updated_user.about = form.about.data
-        updated_user.website = form.website.data
+        # updated_user.name = form.name.data
+        # updated_user.about = form.about.data
+        # updated_user.website = form.website.data
+        print(dir(form))
+        
 
-        db.session.commit()
+        # db.session.commit()
+        updated_user = {"id": current_user.id, "about": form.about.data, "name": form.name.data, "personal_website": form.website.data}
+
+        models.User.update_user(updated_user)
 
         return redirect(url_for("creator_bp.home"))
 

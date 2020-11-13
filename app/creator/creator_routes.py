@@ -17,7 +17,7 @@ def new_post():
     form = creator_forms.PostForm()
 
     if request.method == "POST":
-        models.Post.insert_post(form)
+        models.Article.insert_post(form)
 
     return render_template("creator/creator_new_post.html", form=form)
 

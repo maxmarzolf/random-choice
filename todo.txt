@@ -14,8 +14,14 @@ Push branch to remote: git push --set-upstream origin <local_branch_name>
 
 Delete branch locally & in remote: git branch -d <local_branch_name> && git push origin --delete <remote_branch_name>
 
+Remove pyodbc
+Add a Go To Random Article feature
 
-User:
-Separate tables: Auth & User so that passwords can be updated separately from the rest of info
-Auth: email/password
-User: subtitle, about, website, FK -> Auth
+Auth:
+- login
+    > proper try/except
+    > validate incoming information to avoid SQL injection (is this something to worry about with SQLAlchemy?)
+- update/manage
+    > proper try/except
+    > validate incoming data; accept/reject based on it
+Creator:
