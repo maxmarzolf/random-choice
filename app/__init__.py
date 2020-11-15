@@ -1,10 +1,12 @@
-from flask import Flask, flash, redirect, url_for, session
+from flask import Flask, flash, redirect, url_for, session, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, current_user
 
 from datetime import timedelta
+
+from . import error_handlers
 
 
 db = SQLAlchemy()
@@ -29,6 +31,8 @@ def create_app(test_config=None):
     login_manager.needs_refresh_message = "You need to login again to access this page."
 
     with app.app_context():
+
+        app.register_error_handler(404, error_handlers.page_not_found)
 
         from . import creator
         app.register_blueprint(creator.creator_bp)
