@@ -1,9 +1,7 @@
 {% extends "shared/home_template.html" %}
 {% import "shared/macros.html" as macros %}
 
-{% block content %}   
-    <h1>The Latest</h1>
-
+{% block content %}
     {% if posts %}
         {% for p in posts %}
             {{ macros.post_preview(p["post_id"], p["post_title"], p["post_subtitle"], p["post_date"], p["post_content"]) }}
@@ -11,5 +9,4 @@
     {% else %}
         <p>No posts to show!</p>
     {% endif %}
-    
 {% endblock %}
