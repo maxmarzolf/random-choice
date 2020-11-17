@@ -11,7 +11,7 @@ def reader_home():
 
     #posts_from_db = models.Post.query.order_by(desc(models.Post.post_date)).limit(4)
     posts_from_db = models.Article.get_random_articles(4)
-    print(posts_from_db)
+    # print(posts_from_db)
 
     posts = []
     for p in posts_from_db:
