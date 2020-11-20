@@ -1,12 +1,11 @@
 from flask import Flask, flash, redirect, url_for, session, render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import SQLAlchemyError
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, current_user
 
 from datetime import timedelta
-
-from . import error_handlers
 
 
 db = SQLAlchemy()
@@ -32,7 +31,12 @@ def create_app(test_config=None):
 
     with app.app_context():
 
+        from . import error_handlers
         app.register_error_handler(404, error_handlers.page_not_found)
+        app.register_error_handler(500, error_handlers.internal_server_error)
+        app.register_error_handler(403, error_handlers.forbidden)
+        app.register_error_handler(ValueError, error_handlers.internal_server_error)
+        app.register_error_handler(SQLAlchemyError, error_handlers.sqlalchemy_error)
 
         from . import creator
         app.register_blueprint(creator.creator_bp)
