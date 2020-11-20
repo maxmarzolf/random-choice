@@ -19,7 +19,7 @@ def reader_home():
             post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date}
             print(type(p.posted_date))
             post["post_content"] = p.content_html
-
+            
             posts.append(post)
         
         return render_template("reader/home.html", posts=posts)

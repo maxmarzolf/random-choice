@@ -82,7 +82,7 @@ def create_app(test_config=None):
         #     app.permanent_session_lifetime = timedelta(minutes=1)
             
 
-        #db.create_all()
+        # db.create_all()
         # create a separate file that will drop all and create all tables
         # also, ensure that the logic adds a few pieces of test data?
 

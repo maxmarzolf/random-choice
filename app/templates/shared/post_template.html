@@ -23,9 +23,6 @@
     </div>
 
     <div id="content_container">
-        {% if current_user %}
-            </span>Hi, {{ current_user.first_name }}</span>
-        {% endif %}
         {% block content %}
         {% endblock %}
     </div>
