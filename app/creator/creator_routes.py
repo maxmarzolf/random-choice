@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, url_for, redirect, flash
-from flask_login import current_user, logout_user, login_user, login_required
+from flask import render_template, request
+from flask_login import login_required
 
 from . import creator_bp, creator_forms
-from app import models, bcrypt, db, login_manager
+from app import models
 
 
 @creator_bp.route("/me")
@@ -15,10 +15,8 @@ def home():
 @login_required
 def new_post():
     form = creator_forms.PostForm()
-
     if request.method == "POST":
         models.Article.insert_post(form)
-
     return render_template("creator/creator_new_post.html", form=form)
 
 

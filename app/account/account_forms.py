@@ -3,6 +3,7 @@ from wtforms import StringField, TextAreaField, PasswordField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import InputRequired, Length, Optional, Email
 
+
 class SignupForm(FlaskForm):
     email = EmailField("Email", validators=[InputRequired(), Email(message="Valid email required.")])
     password = PasswordField("Password", validators=[InputRequired()])
