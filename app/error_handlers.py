@@ -1,5 +1,6 @@
 from flask import render_template
 
+
 def page_not_found(e):
     print('404 was hit?')
     return render_template('errors/404.html'), 404

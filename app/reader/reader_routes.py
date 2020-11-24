@@ -1,11 +1,8 @@
-from flask import Flask, render_template, request, flash, abort
-from sqlalchemy import func, desc, exc
-import marko
+from flask import render_template, flash
+from sqlalchemy import exc
 
 from . import reader_bp
-from app import db, models, login_manager
-
-print('in reader_routes: ' + __name__)
+from app import models
 
 
 @reader_bp.route("/")
