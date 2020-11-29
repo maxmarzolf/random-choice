@@ -31,7 +31,7 @@ class User(db.Model, UserMixin):
         _user_data = {"about": user["about"], "name": user["name"], "personal_website": user["personal_website"]}
         cls.query.filter_by(id=user["id"]).update(_user_data)
         db.session.commit()
-    
+
     @classmethod
     def update_password(cls, user_id, old_password, new_password):
         user = cls.query.filter_by(id=user_id).first()
@@ -74,24 +74,25 @@ class Article(db.Model):
     @classmethod
     def insert_article(cls, post_form):
         new_article = cls(title=post_form.title.data, subtitle=post_form.subtitle.data,
-        content=post_form.content.data, posted_date=post_form.date.data, archived=post_form.archive.data)
-        
+                          content=post_form.content.data, posted_date=post_form.date.data,
+                          archived=post_form.archive.data)
+
         db.session.add(new_article)
         db.session.commit()
-    
+
     @classmethod
     def get_article(cls, post_id):
         article = cls.query.filter_by(id=post_id).first()
 
         return article
-    
+
     @classmethod
-    def get_random_articles(cls, numberOfArticles, doNotInclude=''):  
+    def get_random_articles(cls, numberOfArticles, doNotInclude=''):
         if doNotInclude:
             articles = cls.query.filter(id != doNotInclude).order_by(func.random()).limit(numberOfArticles)
         else:
             articles = cls.query.order_by(func.random()).limit(numberOfArticles)
-        
+
         return articles
 
     def __repr__(self):

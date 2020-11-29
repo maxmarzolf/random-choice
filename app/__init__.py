@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from app import models
+# from app import models
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -47,7 +47,8 @@ def create_app(test_config=None):
         @login_manager.user_loader
         def load_user(user_id):
             if user_id is not None:
-                return models.User.query.get(user_id)
+                pass
+                # return models.User.query.get(user_id)
             return None
 
         return app
