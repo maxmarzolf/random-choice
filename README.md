@@ -12,5 +12,5 @@ An entire Article is displayed with links to other Articles on the left
 
 Login for those creating an Article
 <div align="center">
-   <img src = "app/static/images/Login.png">
+   <img src = "app/static/images/login.png">
 </div>
