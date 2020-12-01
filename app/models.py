@@ -87,6 +87,11 @@ class Article(db.Model):
         return article
 
     @classmethod
+    def get_all_articles(cls):
+        articles = cls.query.order_by(Article.posted_date.desc())
+        return articles
+
+    @classmethod
     def get_random_articles(cls, numberOfArticles, doNotInclude=''):
         if doNotInclude:
             articles = cls.query.filter(id != doNotInclude).order_by(func.random()).limit(numberOfArticles)

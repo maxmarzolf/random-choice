@@ -7,7 +7,7 @@ from app import models
 @reader_bp.route("/")
 def reader_home():
     try:
-        posts_from_db = models.Article.get_random_articles(4)
+        posts_from_db = models.Article.get_all_articles()
         posts = []
         for p in posts_from_db:
             post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date}

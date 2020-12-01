@@ -31,8 +31,8 @@ def login():
     form = account_forms.LoginForm()
 
     if form.validate_on_submit():
-        # if current_user.is_authenticated:
-        #     return redirect(url_for("creator_bp.home"))
+        if current_user.is_authenticated:
+            return redirect(url_for("creator_bp.home"))
 
         user = models.User.get_user_by_email(form.email.data)
 
