@@ -20,9 +20,10 @@
 <div align="center">
    <img src = "app/static/images/login.png">
 </div>
-
-
-Create and save Article
+<br>
+<br>
+<b>Create and save Article</b>
+<br>
 <div align="center">
    <img src = "app/static/images/create_article.png">
 </div>
