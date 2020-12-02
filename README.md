@@ -1,21 +1,31 @@
-A collaborative blog with a loose Python theme.
-
-Articles can be viewed on the homepage
+<b>A collaborative blog with a loose Python theme.</b>
+<br>
+<br>
+<b>Articles can be viewed on the homepage</b>
+<br>
 <div align="center">
    <img src = "app/static/images/home.png">
 </div>
-
-An entire Article is displayed with links to other Articles on the left
+<br>
+<br>
+<b>An entire Article is displayed with links to other Articles on the left</b>
+<br>
 <div align="center">
    <img src = "app/static/images/article.png">
 </div>
-
-Login for those creating an Article
+<br>
+<br>
+<b>Login for those creating an Article</b>
+<br>
 <div align="center">
    <img src = "app/static/images/login.png">
 </div>
+
 
 Create and save Article
 <div align="center">
    <img src = "app/static/images/create_article.png">
 </div>
+
+(lyrics used for test data, we own nothing)
+
