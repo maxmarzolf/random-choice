@@ -14,3 +14,8 @@ Login for those creating an Article
 <div align="center">
    <img src = "app/static/images/login.png">
 </div>
+
+Create and save Article
+<div align="center">
+   <img src = "app/static/images/create_article.png">
+</div>
