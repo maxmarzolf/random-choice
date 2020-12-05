@@ -51,7 +51,7 @@ body {
 
 /* GENERAL STYLES */
 body {
-    background-color: #FAFAFA;
+    background-color: #fcfcfc;
     font-family: "Work Sans", sans-serif;
     box-sizing: border-box;
 }
@@ -83,7 +83,7 @@ h6 {
 /* HEADER */
 #header_container {
     align-items: center;
-    background-color: #FAFAFA;
+    background-color: #fcfcfc;
     border-bottom: 1px solid #24242344;
     color: #242423;
     display: flex;
