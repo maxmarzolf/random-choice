@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from . import creator_bp, creator_forms
 from app import models
@@ -8,7 +8,9 @@ from app import models
 @creator_bp.route("/me")
 @login_required
 def home():
-    return render_template("creator/creator_home.html")
+    author_articles = models.Article.get_articles_by_author(current_user.id)
+
+    return render_template("creator/creator_home.html", articles=author_articles)
 
 
 @creator_bp.route("/me/articles/new", methods=["GET", "POST"])
@@ -16,7 +18,10 @@ def home():
 def new_post():
     form = creator_forms.PostForm()
     if request.method == "POST":
-        models.Article.insert_article(form)
+        models.Article.insert_article(form, current_user.id)
+
+        return redirect(url_for('creator_bp.home'))
+
     return render_template("creator/creator_new_post.html", form=form)
 
 
@@ -33,7 +38,7 @@ def edit_article(article_id):
     
     article_from_db = models.Article.get_article(article_id)
     article = { "title":article_from_db.title, "subtitle":article_from_db.subtitle, "content":article_from_db.content_markdown, 
-                "date":article_from_db.posted_date, "author":article_from_db.author, "archived":article_from_db.archived }
+                "date":article_from_db.posted_date, "author":current_user.id, "archived":article_from_db.archived }
 
     # pre-populate the form with data from the article
     form = creator_forms.PostForm(**article)
