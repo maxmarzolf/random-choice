@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin
 from sqlalchemy import func
+import markdown
 
 from app import db, bcrypt
 
@@ -72,12 +73,20 @@ class Article(db.Model):
     archived = db.Column(db.Boolean(), nullable=False, default=False)
 
     @classmethod
-    def insert_article(cls, post_form):
+    def insert_article(cls, post_form, user_id):
         new_article = cls(title=post_form.title.data, subtitle=post_form.subtitle.data,
-                          content=post_form.content.data, posted_date=post_form.date.data,
-                          archived=post_form.archive.data)
+                          content_markdown=post_form.content.data, content_html=markdown.markdown(post_form.content.data),
+                          author=user_id, posted_date=post_form.date.data, archived=post_form.archive.data)
 
         db.session.add(new_article)
+        db.session.commit()
+    
+    @classmethod
+    def update_article(cls, article_id, article_form):
+        print(article_form)        
+        article = {"title": article_form.title.data, "subtitle": article_form.subtitle.data, "content_markdown": article_form.content.data, 
+                    "content_html":markdown.markdown(article_form.content.data), "archived": article_form.archive.data, "edited": True}
+        cls.query.filter_by(id=article_id).update(article)
         db.session.commit()
 
     @classmethod
@@ -85,6 +94,12 @@ class Article(db.Model):
         article = cls.query.filter_by(id=post_id).first()
 
         return article
+    
+    @classmethod
+    def get_articles_by_author(cls, author_id):
+        articles = cls.query.filter_by(author=author_id).all()
+
+        return articles
 
     @classmethod
     def get_all_articles(cls):

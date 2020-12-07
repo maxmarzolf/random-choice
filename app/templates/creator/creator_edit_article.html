@@ -1,0 +1,48 @@
+{% extends "shared/template.html" %}
+
+{% block content %}
+<form action="" method="POST">
+
+    {{ form.csrf_token() }}
+
+    <label>{{ form.title.label(class_="label") }}</label>
+    {{ form.title(class_="post_title input") }}
+
+    <label>{{ form.subtitle.label(class_="label") }}</label>
+    {{ form.subtitle(class_="post_subtitle input") }}
+
+    <label>{{ form.content.label(class_="label") }}</label>
+    {{ form.content(class_="post_content input") }}
+
+    <label>{{ form.date.label(class_="label") }}</label>
+    {{ form.date(class_="post_date input dt-picker") }}
+
+    <label>{{ form.archive.label(class_="label") }}</label>
+    {{ form.archive(class_="post_archive input") }}
+
+    <button class="btn" type="submit">Post</button>
+
+</form>
+
+<div id="md_preview_container"></div>
+
+<button id="preview_md" type="button">Preview</button>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    const preview_md_button = document.querySelector('#preview_md');
+
+    preview_md_button.addEventListener('click', event=> {
+        console.log('preview md');
+        document.querySelector('#md_preview_container').innerHTML = marked(document.querySelector('#content').value);
+    });
+
+    const datepicker = flatpickr(".dt-picker", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:m:S"
+    });
+</script>
+{% endblock %}

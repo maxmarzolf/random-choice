@@ -30,9 +30,9 @@ def create_app(test_config=None):
 
         from . import error_handlers
         app.register_error_handler(404, error_handlers.page_not_found)
-        app.register_error_handler(500, error_handlers.internal_server_error)
+        #app.register_error_handler(500, error_handlers.internal_server_error)
         app.register_error_handler(403, error_handlers.forbidden)
-        app.register_error_handler(ValueError, error_handlers.internal_server_error)
+        #app.register_error_handler(ValueError, error_handlers.internal_server_error)
         app.register_error_handler(SQLAlchemyError, error_handlers.sqlalchemy_error)
 
         from . import creator
@@ -46,6 +46,7 @@ def create_app(test_config=None):
 
         @login_manager.user_loader
         def load_user(user_id):
+            print('load_user hit')
             if user_id is not None:
                 return models.User.query.get(user_id)
             return None

@@ -38,6 +38,7 @@ def login():
 
         if user and user.verify_password(user.id, form.password.data):
             login_user(user, duration=timedelta(minutes=1), remember=True)
+            print('PASSWORD VERIFIED')
             print(session)
 
             if "next" in session:
@@ -48,6 +49,7 @@ def login():
                 print(session)
                 if is_safe_url(next_url):
                     print("url is safe")
+                    print(next_url)
                     return redirect(next_url)
                 else:
                     print("url is not safe")

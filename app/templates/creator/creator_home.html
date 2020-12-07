@@ -12,9 +12,15 @@
     {% endwith %}
 
     <h3>Your Account</h3>
-
-    <h3>Your Posts</h3>
     <p><a href="{{ url_for('account_bp.manage_account') }}">Manage</a></p>
     <p><a href="{{ url_for('account_bp.change_password') }}">Change Password</a></p>
-    <a href="{{ url_for('creator_bp.new_post') }}">New Post</a>
+
+    <h3>Your Posts</h3>        
+    <div class="author_articles">
+        {% for a in articles %}
+            <p><a href="{{ url_for('creator_bp.edit_article', article_id=a.id) }}">{{ a.title }}</a></p>
+        {% endfor %}
+    </div>
+    <br/>
+    <a href="{{ url_for('creator_bp.new_post') }}">Make a New Post</a>
 {% endblock %}
