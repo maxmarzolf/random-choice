@@ -1,0 +1,9 @@
+body {
+    background-color: #fcfcfc;
+    color: #383838;
+    font-family: "Work Sans", sans-serif;
+}
+
+.text-muted {
+    color: #6c757d;
+}
