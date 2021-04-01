@@ -4,11 +4,16 @@
             margin-bottom: 2rem;
             position: relative;
             display: flex;
-            flex-direction: column;            
+            flex-direction: column; 
+            padding: 1rem;
         }
 
-        .post:hover .post-header {
-            border-left: 2px solid #383838;
+        .post:hover {
+            transform: scale(1.015);
+        }
+
+        .post:hover .post-header::before {
+            outline: 2px solid #383838;            
         }
 
         .post:hover .post-preview::before {
@@ -24,8 +29,21 @@
         .post-header {
             display: block;
             margin-bottom: 1rem;
-            border-left: 1px solid #5e5e5e;
+            /* border-left: 2px solid #5e5e5e; */
             padding-left: 1rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .post-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background: red;
+            width: 0px;
+            outline: 1px solid #383838;
         }
 
         .post-preview {
@@ -47,12 +65,40 @@
         }
 
         .post-footer {
-            display: block;
+            display: flex;
+            justify-content: right;
             background: inherit;
-            padding-top: 1rem;
             padding-bottom: 1rem;
-            padding-left: 1rem;
+            position: relative;
+            height: 4rem;
+            color: inherit;
         }
+
+        .post-footer span {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: .6rem;
+            vertical-align: middle;
+            /*background: #383838;
+            color: #fcfcfc;*/
+            color: #383838;
+            z-index: 1;
+        }
+
+        /*.post-footer span::before {
+            content: '';
+            background: transparent;
+            width: 60%;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-bottom: 2px solid #383838;
+            border-right: 2px solid #383838;
+            border-top: 2px solid #383838;
+            z-index: 0;
+        }*/
     </style>
     <div class="post">
         <a href="{{ url_for('reader_bp.read_post', post_id=post_id) }}">
@@ -64,7 +110,7 @@
                 {{ post_content|safe }}
             </div>
             <div class="post-footer">
-                <p class="mt-2 text-right">{{ post_date|display_date()|safe }}</p>
+                <span><em>{{ post_date|display_date()|safe }}</em></span>
             </div>
         </a>
     </div>
