@@ -1,3 +1,25 @@
-<div id="header_container">
+<style>
+    .header-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #383838;
+    }
+
+    .header-container a {
+        min-width: 450px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-container a img {
+        margin: auto;
+    }
+</style>
+
+<div class="header-container">
     <a href="/"><img src="{{url_for('static', filename='images/logo.png')}}" /></a>
 </div>

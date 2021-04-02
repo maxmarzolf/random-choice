@@ -1,9 +1,118 @@
 {% macro post_preview(post_id, post_title, post_subtitle, post_date, post_content) %}
-    <div class="post_preview">
-        <h3><a href="{{ url_for('reader_bp.read_post', post_id=post_id) }}">{{ post_title|safe }}</a></h3>
-        <p>{{ post_subtitle|safe }}</p>
-        <p>{{ post_date|display_date()|safe }}</p>
-        <p>{{ post_content|truncate(500, True, "...", 3)|safe }}</p>
+    <style>
+        .post {
+            margin-bottom: 2rem;
+            position: relative;
+            display: flex;
+            flex-direction: column; 
+            padding: 1rem;
+        }
+
+        .post:hover {
+            transform: scale(1.015);
+        }
+
+        .post:hover .post-header::before {
+            outline: 2px solid #383838;            
+        }
+
+        .post:hover .post-preview::before {
+            content: '';
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(transparent 60%, #fcfcfc);
+            position: absolute;
+        }
+
+        .post-header {
+            display: block;
+            margin-bottom: 1rem;
+            /* border-left: 2px solid #5e5e5e; */
+            padding-left: 1rem;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .post-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            background: red;
+            width: 0px;
+            outline: 1px solid #383838;
+        }
+
+        .post-preview {
+            height: 10rem;
+            display: block;
+            overflow: hidden;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .post-preview::before {
+            content: '';
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(transparent 40%, #fcfcfc);
+            position: absolute;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: right;
+            background: inherit;
+            padding-bottom: 1rem;
+            position: relative;
+            height: 4rem;
+            color: inherit;
+        }
+
+        .post-footer span {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: .6rem;
+            vertical-align: middle;
+            /*background: #383838;
+            color: #fcfcfc;*/
+            color: #383838;
+            z-index: 1;
+        }
+
+        /*.post-footer span::before {
+            content: '';
+            background: transparent;
+            width: 60%;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-bottom: 2px solid #383838;
+            border-right: 2px solid #383838;
+            border-top: 2px solid #383838;
+            z-index: 0;
+        }*/
+    </style>
+    <div class="post">
+        <a href="{{ url_for('reader_bp.read_post', post_id=post_id) }}">
+            <div class="post-header">
+                <h1 class>{{ post_title|safe }}</h1>
+                <h2 class="text-muted h3">{{ post_subtitle|safe }}</h2>
+            </div>
+            <div class="post-preview">
+                {{ post_content|safe }}
+            </div>
+            <div class="post-footer">
+                <span><em>{{ post_date|display_date()|safe }}</em></span>
+            </div>
+        </a>
     </div>
 {% endmacro %}
 

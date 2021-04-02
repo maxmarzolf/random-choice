@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random.choice(articles)</title>
+    <!--{{ url_for('static', filename='css/main.css') }}-->
+
+    <link href="{{ url_for('static', filename='css/reset.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/cosmetic.css') }}" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+<body>
+
+    <div id="header">
+        {% block header %}
+            {% include "shared/header.html" %}
+        {% endblock %}
+    </div>
+
+    <div id="left_gutter">        
+        {% block left_gutter %}
+        {% endblock %}
+    </div>
+
+    <div id="content_container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <span>[{{ category }}] {{ message }}</span>
+            {% endfor %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="right_gutter">
+        {% block right_gutter %}
+        {% endblock %}
+    </div>
+    
+</body>
+</html>

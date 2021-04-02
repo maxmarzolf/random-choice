@@ -1,5 +1,11 @@
-{% extends "shared/home_template.html" %}
+{% extends "shared/foundation_centered.html" %}
 {% import "shared/macros.html" as macros %}
+
+{% block left_gutter %}
+    {% with other_posts=other_posts %}
+        {% include "reader/posts_list.html" %}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
     {% if posts %}
