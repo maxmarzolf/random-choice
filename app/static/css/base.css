@@ -1,5 +1,8 @@
 body {
     box-sizing: border-box;
+    background-color: #fcfcfc;
+    color: #383838;
+    font-family: "Work Sans", sans-serif;
 }
 
 h1 {
@@ -31,9 +34,62 @@ a {
     color: inherit;
 }
 
+/* INPUTS */
+
+input {
+    height: 2rem;
+    margin: .3rem 0 .8rem 0;
+    padding: .3rem;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.input {
+    border: 1px solid #242423;
+    display: block;    
+    width: 100%;
+}
+
+.input:focus {
+    border: 2px solid #242423;
+    outline: none;
+}
+
+.input:active {
+    outline: none;
+    border: 2px solid #242423;
+}
+
+/* BUTTONS */
+
+button {
+    height: 2rem;
+    min-width: 6rem;
+    font-size: 1em;
+    font-family: inherit;
+    color: inherit;
+    padding: .6rem 0;
+    margin: .6rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #fcfcfc;
+    border: solid 1px #242423;    
+}
+
+.btn:hover {
+    background-color: #F1F1F1;
+}
+
 .h3 {
     font-size: 1.7em;
 }
+
+/* MARGIN UTILITIES */
 
 .mt-2 {
     margin-top: 1em;
@@ -49,10 +105,16 @@ a {
     margin-right: 1em;
 }
 
+/* TEXT UTILITIES */
+
 .text-justified {
     text-align: justify;
 }
 
 .text-right {
     text-align: right;
+}
+
+.text-muted {
+    color: #6c757d;
 }

@@ -7,7 +7,7 @@
     <!--{{ url_for('static', filename='css/main.css') }}-->
 
     <link href="{{ url_for('static', filename='css/reset.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/layout_fc.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/layout_fco.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
 
 <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
@@ -19,11 +19,6 @@
         {% endblock %}
     </div>
 
-    <div id="left_gutter">        
-        {% block left_gutter %}
-        {% endblock %}
-    </div>
-
     <div id="content_container">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% for category, message in messages %}
@@ -31,11 +26,6 @@
             {% endfor %}
         {% endwith %}
         {% block content %}
-        {% endblock %}
-    </div>
-
-    <div id="right_gutter">
-        {% block right_gutter %}
         {% endblock %}
     </div>
     

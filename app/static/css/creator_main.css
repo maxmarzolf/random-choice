@@ -130,32 +130,10 @@ h6 {
 /* FOOTER */
 
 /* FORMS */
-.btn {
-    background-color: #fcfcfc;
-    border: solid 1px #242423;
-    color: inherit;
-    font-family: inherit;
-    font-size: 1em;
-    min-width: 6rem;
-    padding: .6rem 0;
-    margin: .6rem 0;
-}
 
-.btn:hover {
-    background-color: #F1F1F1;
-}
 
-.input {
-    border: 1px solid #242423;
-    display: block;
-    margin: .3rem 0 .8rem 0;
-    padding: .3rem;
-    width: 100%;
-}
 
-.input:focus {
-    border: 2px solid #242423;
-}
+
 
 .label {
     display: inline-block;

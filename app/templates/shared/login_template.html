@@ -6,10 +6,9 @@
     <title>random.choice(articles)</title>
     <!--{{ url_for('static', filename='css/main.css') }}-->
 
-    <link href="{{ url_for('static', filename='css/creator_main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-</head>
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet"> </head>
 <body>
 
     <div id="header">
@@ -18,15 +17,15 @@
         {% endblock %}
     </div>
 
-    <div id="left_gutter"></div>
-
-    <div id="content_container">
-        Current User: {{ current_user }}        
-        {% block content %}
+    <div id="left_nav">
+        {% block left_nav %}
         {% endblock %}
     </div>
 
-    <div id="right_gutter"></div>
+    <div id="content_container">
+        {% block content %}
+        {% endblock %}
+    </div>
     
 </body>
 </html>
