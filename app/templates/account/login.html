@@ -1,25 +1,33 @@
-{% extends "shared/template.html" %}
+{% extends "shared/foundation_content_only.html" %}
 
 {% block content %}
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+    <style>
+        .form-container {
+            width: 30%;
+            min-width: 400px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+        }
 
-    <form action="" method="POST">
-        {{ form.csrf_token() }}
+        form {
+            width: 100%;
+        }
+    </style>
 
-        <label>{{ form.email.label(class_="label") }}</label>
-        {{ form.email(class_="post_title input") }}
+    <div class="form-container">
+        <form action="" method="POST">
+            {{ form.csrf_token() }}
 
-        <label>{{ form.password.label(class_="label") }}</label>
-        {{ form.password(class_="post_title input") }}
+            <label>{{ form.email.label(class_="label") }}</label>
+            {{ form.email(class_="post_title input") }}
 
-        <button class="btn" type="submit">Login</button>
-    </form>
+            <label>{{ form.password.label(class_="label") }}</label>
+            {{ form.password(class_="post_title input") }}
+
+            <button class="btn" type="submit">Login</button>
+        </form>
+    </div>
 
 {% endblock %}
