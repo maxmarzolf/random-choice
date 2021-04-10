@@ -19,6 +19,8 @@
         {% block header %}
             {% include "shared/header.html" %}
         {% endblock %}
+
+        {% include "shared/messages.html" %}
     </div>
 
     <div id="left_gutter">        
@@ -27,11 +29,6 @@
     </div>
 
     <div id="content_container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% for category, message in messages %}
-                <span>[{{ category }}] {{ message }}</span>
-            {% endfor %}
-        {% endwith %}
         {% block content %}
         {% endblock %}
     </div>
