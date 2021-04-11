@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
+from sqlalchemy import exc
 
 from . import creator_bp, creator_forms
 from app import models
@@ -8,9 +9,18 @@ from app import models
 @creator_bp.route("/me")
 @login_required
 def home():
-    author_articles = models.Article.get_articles_by_author(current_user.id)
-
-    return render_template("creator/creator_home.html", articles=author_articles)
+    try:
+        posts_from_db = models.Article.get_articles_by_author(current_user.id)
+        posts = []
+        for p in posts_from_db:
+            post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date}
+            print(type(p.posted_date))
+            post["post_content"] = p.content_html
+            posts.append(post)
+        return render_template("creator/creator_home.html", posts=posts)
+    except exc.SQLAlchemyError:
+        flash('Could not retrieve posts.', 'error')
+        return render_template("creator/creator_home.html", posts=[])
 
 
 @creator_bp.route("/me/articles/new", methods=["GET", "POST"])
