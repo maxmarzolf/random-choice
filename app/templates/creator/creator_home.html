@@ -1,26 +1,84 @@
 {% extends "shared/foundation_centered.html" %}
 
+{% block left_gutter %}
+    <style>
+        .user-info {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    </style>
+    <div class="user-info">
+        <p class="h5">Your Account</p>
+        <p>{{ current_user.name }}</p>
+        <p>{{ current_user.about }}</p>
+        <p>{{ current_user.email }}</p>
+        <p>{{ current_user.personal_website }}</p>
+        <br/>
+        <p><a href="{{ url_for('account_bp.manage_account') }}"><button class="btn" type="button">Manage</button></a></p>        
+        <p><a href="{{ url_for('account_bp.change_password') }}"><button class="btn" type="button">Change Password</button></a></p>        
+    </div>
+{% endblock %}
+
 {% block content %}
-    <h1>Welcome to Your Command Centre</h1>
+    <style>
+        .new-post-button {
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            margin-bottom: 2rem;
+        }
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+        .post {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 2rem;
+            position: relative;
+            padding: 1rem 0;
+        }
 
-    <h3>Your Account</h3>
-    <p><a href="{{ url_for('account_bp.manage_account') }}">Manage</a></p>
-    <p><a href="{{ url_for('account_bp.change_password') }}">Change Password</a></p>
+        .post:hover .post-preview {
+            border-left: 2px solid #383838;
+            padding-left: 1rem;
+        }
 
-    <h3>Your Posts</h3>        
-    <div class="author_articles">
-        {% for a in articles %}
-            <p><a href="{{ url_for('creator_bp.edit_article', article_id=a.id) }}">{{ a.title }}</a></p>
+        .post:hover .post-edit button {
+            transform: scale(1.05);
+        }
+
+        .post-edit {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .post-edit button {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    </style>
+
+    <div class="new-post-button">
+        <a href="{{ url_for('creator_bp.new_post') }}"><button class="btn" type="button">New Post</button></a>
+    </div>
+
+    {% if posts and posts|length %}
+    <div class="posts">
+        {% for p in posts %}
+            <div class="post">
+                <div class="post-preview">
+                    <h3>{{ p.post_title }}</h3>
+                    <h4>{{ p.post_subtitle }}</h4>
+                    <p>{{ p.post_date }}</p>
+                </div>
+                <div class="post-edit">
+                    <a href="{{ url_for('creator_bp.edit_article', article_id=p.post_id) }}"><button class="btn" type="button">Edit</button></a>
+                </div>
+            </div>            
         {% endfor %}
     </div>
-    <br/>
-    <a href="{{ url_for('creator_bp.new_post') }}">Make a New Post</a>
+    {% else %}
+        <div class="author_articles">
+            <p><em>You don't have any posts yet.</em></p>
+        </div>
+    {% endif %}
 {% endblock %}
