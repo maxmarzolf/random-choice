@@ -35,7 +35,7 @@ def read_post(post_id):
             "post_date": post_from_db.posted_date, "post_content": post_from_db.content_html}
     other_posts = []
     for op in other_posts_from_db:
-        p = {"post_id": op.id, "post_title": op.title}
+        p = {"post_id": other_posts_from_db.id, "post_title": other_posts_from_db.title}
         other_posts.append(p)
     print(other_posts)
     return render_template("reader/reader_view_post.html", post=post, other_posts=other_posts)
