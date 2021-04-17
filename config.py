@@ -7,6 +7,7 @@ load_dotenv(path.join(base_directory, '../../.env'))
 
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = environ.get("SECRET_KEY")
     USE_SESSION_FOR_NEXT = True
 
 
