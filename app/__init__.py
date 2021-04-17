@@ -5,7 +5,6 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
-
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
@@ -13,8 +12,12 @@ login_manager = LoginManager()
 
 
 def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object('config.ConfigDev')
+    app = Flask(__name__, instance_relative_config=True)
+
+    if app.config['ENV'] == 'production':
+        app.config.from_object("config.Production")
+    else:
+        app.config.from_object("config.Development")
 
     db.init_app(app)
     migrate.init_app(app, db)

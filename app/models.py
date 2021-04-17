@@ -107,11 +107,11 @@ class Article(db.Model):
         return articles
 
     @classmethod
-    def get_random_articles(cls, numberOfArticles, doNotInclude=''):
-        if doNotInclude:
-            articles = cls.query.filter(id != doNotInclude).order_by(func.random()).limit(numberOfArticles)
+    def get_random_articles(cls, number_of_articles, do_not_include=''):
+        if do_not_include:
+            articles = cls.query.filter(id != do_not_include).order_by(func.random()).limit(number_of_articles)
         else:
-            articles = cls.query.order_by(func.random()).limit(numberOfArticles)
+            articles = cls.query.order_by(func.random()).limit(number_of_articles)
 
         return articles
 
