@@ -4,14 +4,6 @@ from dotenv import load_dotenv
 
 class Config:
     base_directory = path.abspath(path.dirname(__file__))
-    load_dotenv(path.join(base_directory, '../../.env'))
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = environ.get("SECRET_KEY")
-    USE_SESSION_FOR_NEXT = True
-
-
-class TestConfig:
-    base_directory = path.abspath(path.dirname(__file__))
     load_dotenv(path.join(base_directory, '.env'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = environ.get("SECRET_KEY")
@@ -31,6 +23,6 @@ class Production(Config):
     TESTING = False
 
 
-class Testing(TestConfig):
+class Testing(Config):
     SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
     TESTING = True
