@@ -23,6 +23,6 @@ class Production(Config):
     TESTING = False
 
 
-class Testing(Config):
-    SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
+class Test(Config):
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
