@@ -26,7 +26,7 @@ class Production(Config):
 class Test(Config):
     TESTING = True
     def __init__(self, no_db=False):
-        SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
+        self.SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
         if no_db:
             # SQLAlchemy throws an error if the string is empty or missing a dialect.
             self.SQLALCHEMY_DATABASE_URI = 'postgres+psycopg2://something'
