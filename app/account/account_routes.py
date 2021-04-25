@@ -68,7 +68,7 @@ def login():
 def logout():
     logout_user()
 
-    return redirect(url_for("account_bp.login"))
+    return redirect(url_for("reader_bp.reader_home"))
 
 
 @account_bp.route("/me/manage", methods=["GET", "POST"])

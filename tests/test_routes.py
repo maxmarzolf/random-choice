@@ -35,12 +35,16 @@ def test_login_w_db(client):
     res = login(client, 'test@test.com', 'password')
     assert b'Your Account' in res.data
 
+    lg = logout(client)
+    assert b'<div class="post">' in lg.data
+
 
 def test_logout_w_db(client):
+    res = login(client, 'test@test.com', 'password')
     res = logout(client)
-    assert b'Login</button>' in res.data
+    assert b'<div class="post">' in res.data
 
 
-def test_login_no_db(client_no_db):
-    res = login(client_no_db, 'test@test.com', 'password')
-    assert b'Something went very, very wrong.' in res.data
+# def test_login_no_db(client_no_db):
+#     res = login(client_no_db, 'test@test.com', 'password')
+#     assert b'Login</button>' in res.data
