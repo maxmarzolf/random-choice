@@ -9,13 +9,15 @@ import config
 def client():
     app = create_app(config=config.Test())
     app.testing = True
+    app.config['WTF_CSRF_ENABLED'] = False
     client = app.test_client()
     yield client
 
 
 @pytest.fixture
-def client_no_db(config=config.Test()):
-    app = create_app(config=config)
+def client_no_db():
+    app = create_app(config=config.Test(no_db=True))
+    app.config['WTF_CSRF_ENABLED'] = False
 
     with app.test_client() as client:
         with app.app_context():
