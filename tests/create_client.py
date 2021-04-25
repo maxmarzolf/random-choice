@@ -14,7 +14,7 @@ def client():
 
 
 @pytest.fixture
-def client_no_db(config=config.Test()):
+def client_no_db(config=config.Test(no_db=True)):
     app = create_app(config=config)
 
     with app.test_client() as client:
