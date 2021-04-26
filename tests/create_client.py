@@ -17,7 +17,9 @@ def client():
 def development_client():
     app = create_app(config=config.Development())
     app.testing = True
-    app.config['WTF_CSRF_ENABLED'] = False
+    app.config['FLASK_ENV'] = 'development'
+    app.config['ENV'] = 'development'
+    app.config['DEBUG'] = True
     client = app.test_client()
     yield client
 
@@ -26,7 +28,9 @@ def development_client():
 def production_client():
     app = create_app(config=config.Production())
     app.testing = True
-    app.config['WTF_CSRF_ENABLED'] = False
+    app.config['FLASK_ENV'] = 'production'
+    app.config['ENV'] = 'production'
+    app.config['DEBUG'] = False
     client = app.test_client()
     yield client
 
