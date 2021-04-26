@@ -12,17 +12,11 @@ class Config:
 
 class Development(Config):
     SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
-    ENV = 'development'
-    FLASK_ENV = 'development'
     TESTING = False
-    DEBUG = True
 
 
 class Production(Config):
     SQLALCHEMY_DATABASE_URI = environ.get("DATABASE_URI")
-    ENV = 'production'
-    FLASK_ENV = 'production'
-    DEBUG = False
     TESTING = False
 
 
@@ -33,4 +27,4 @@ class Test(Config):
         self.SQLALCHEMY_DATABASE_URI = environ.get("DEV_DATABASE_URI")
         if no_db:
             # SQLAlchemy throws an error if the string is empty or missing a dialect.
-            self.SQLALCHEMY_DATABASE_URI = 'postgres+psycopg2://something'
+            self.SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://something'
