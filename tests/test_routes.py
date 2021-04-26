@@ -32,8 +32,9 @@ def test_home_no_post_no_db(client_no_db):
 
 # Login Routes
 def test_login_w_db(client):
-    res = login(client, 'test@test.com', 'password')
-    assert b'Your Account' in res.data
+    with client:
+        res = login(client, 'test@test.com', 'password')
+        assert(b'Your Account' in res.data)
 
     lg = logout(client)
     assert b'<div class="post">' in lg.data
