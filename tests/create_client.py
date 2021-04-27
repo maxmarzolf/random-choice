@@ -6,7 +6,7 @@ import config
 
 @pytest.fixture
 def client():
-    app = create_app(config=config.Test())
+    app = create_app()
     app.testing = True
     app.config['WTF_CSRF_ENABLED'] = False
     client = app.test_client()
@@ -15,7 +15,7 @@ def client():
 
 @pytest.fixture
 def development_client():
-    app = create_app(config=config.Development())
+    app = create_app()
     app.testing = True
     app.config['FLASK_ENV'] = 'development'
     app.config['ENV'] = 'development'
@@ -26,7 +26,7 @@ def development_client():
 
 @pytest.fixture
 def production_client():
-    app = create_app(config=config.Production())
+    app = create_app()
     app.testing = True
     app.config['FLASK_ENV'] = 'production'
     app.config['ENV'] = 'production'
@@ -37,7 +37,7 @@ def production_client():
 
 @pytest.fixture
 def client_no_db():
-    app = create_app(config=config.Test(no_db=True))
+    app = create_app()
     app.config['WTF_CSRF_ENABLED'] = False
 
     with app.test_client() as client:

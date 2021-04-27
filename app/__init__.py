@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
@@ -13,10 +15,17 @@ bcrypt = Bcrypt()
 login_manager = LoginManager()
 
 
-def create_app(config=config.Development()):
+def create_app():
     app = Flask(__name__, instance_relative_config=True)
 
-    app.config.from_object(config)
+    if os.environ.get('FLASK_ENV') == "production":
+        app.config.from_object("config.Production")
+    elif os.environ.get('FLASK_ENV') == "development":
+        app.config.from_object("config.Development")
+    elif os.environ.get('FLASK_ENV') == "test":
+        app.config.from_object("config.Test")
+    else:
+        app.config.from_object("config.Development")    
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -9,7 +9,6 @@ def reader_home():
     try:
         posts_from_db = models.Article.get_all_articles()
         other_posts_from_db = models.Article.get_random_articles(5)
-        print(other_posts_from_db[0])
         posts = []
         other_posts = []
         for p in posts_from_db:
