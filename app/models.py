@@ -83,7 +83,6 @@ class Article(db.Model):
     
     @classmethod
     def update_article(cls, article_id, article_form):
-        print(article_form)        
         article = {"title": article_form.title.data, "subtitle": article_form.subtitle.data, "content_markdown": article_form.content.data, 
                     "content_html":markdown.markdown(article_form.content.data), "archived": article_form.archive.data, "edited": True}
         cls.query.filter_by(id=article_id).update(article)

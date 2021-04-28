@@ -7,8 +7,6 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
-import config
-
 db = SQLAlchemy()
 migrate = Migrate()
 bcrypt = Bcrypt()
@@ -57,11 +55,8 @@ def create_app():
 
         @login_manager.user_loader
         def load_user(user_id):
-            print('load_user hit')
             if user_id is not None:
                 return models.User.query.get(user_id)
             return None
 
         return app
-
-    

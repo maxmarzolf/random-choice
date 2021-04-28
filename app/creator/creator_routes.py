@@ -13,9 +13,8 @@ def home():
         posts_from_db = models.Article.get_articles_by_author(current_user.id)
         posts = []
         for p in posts_from_db:
-            post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date}
-            print(type(p.posted_date))
-            post["post_content"] = p.content_html
+            post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date,
+                    "post_content": p.content_html}
             posts.append(post)
         return render_template("creator/creator_home.html", posts=posts)
     except exc.SQLAlchemyError:
@@ -41,7 +40,6 @@ def edit_article(article_id):
     if request.method == 'POST':
         form = creator_forms.PostForm()
         if form.validate():
-            print('validated form.')
             models.Article.update_article(article_id, form)
 
             return redirect(url_for("creator_bp.home"))

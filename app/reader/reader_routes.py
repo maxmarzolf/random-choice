@@ -12,13 +12,11 @@ def reader_home():
         posts = []
         other_posts = []
         for p in posts_from_db:
-            post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date}
-            print(type(p.posted_date))
-            post["post_content"] = p.content_html
+            post = {"post_id": p.id, "post_title": p.title, "post_subtitle": p.subtitle, "post_date": p.posted_date,
+                    "post_content": p.content_html}
             posts.append(post)
         for op in other_posts_from_db:
             p = {"post_id": op.id, "post_title": op.title}
-            print(p)
             other_posts.append(p)
         return render_template("reader/home.html", posts=posts, other_posts=other_posts)
     except exc.SQLAlchemyError:
@@ -37,7 +35,6 @@ def read_post(post_id):
         for op in other_posts_from_db:
             p = {"post_id": op.id, "post_title": op.title}
             other_posts.append(p)
-        print(other_posts)
         return render_template("reader/reader_view_post.html", post=post, other_posts=other_posts)
     except exc.SQLAlchemyError:
         flash('Could not retrieve post.', 'error')

@@ -38,24 +38,16 @@ def login():
 
         if user and user.verify_password(user.id, form.password.data):
             login_user(user, duration=timedelta(minutes=1), remember=True)
-            print('PASSWORD VERIFIED')
-            print(session)
 
             if "next" in session:
                 next_url = session["next"]
                 session.pop("next")
                 session.modified = True
-                print("next in session")
-                print(session)
                 if is_safe_url(next_url):
-                    print("url is safe")
-                    print(next_url)
                     return redirect(next_url)
                 else:
-                    print("url is not safe")
                     return redirect(url_for("creator_bp.home"))
             else:
-                print("next is not in session")
                 return redirect(url_for("creator_bp.home"))
         else:
             flash("Please enter a valid user name and password.")
@@ -75,7 +67,6 @@ def logout():
 @login_required
 def manage_account():
     user_data = {"about": current_user.about, "website": current_user.personal_website, "name": current_user.name}
-    print(session)
     form = account_forms.UserManagementForm(data=user_data)
 
     if request.method == "POST":
