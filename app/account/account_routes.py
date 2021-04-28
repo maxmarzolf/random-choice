@@ -35,12 +35,11 @@ def login():
     form = account_forms.LoginForm()
 
     if form.validate_on_submit():
+        print('validated form')
         user = models.User.get_user_by_email(form.email.data)
 
-        if user and user.verify_password(user.id, form.password.data):
+        if user and user.verify_password(user.id, form.password.data) == True:
             login_user(user, remember=False)
-            print('PASSWORD VERIFIED')
-            print(session)
 
             next_url = request.args.get('next')
             if next_url and is_safe_url(next_url):
@@ -102,9 +101,14 @@ def change_password():
     form = account_forms.ChangePasswordForm()
 
     if form.validate_on_submit():
-        models.User.update_password(user_id=current_user.id, old_password=form.old_password.data,
+        updated_password = models.User.update_password(user_id=current_user.id, old_password=form.old_password.data,
                                     new_password=form.new_password.data)
+        if updated_password == True:
+            logout_user()
 
-        return redirect(url_for("creator_bp.home"))
+            return redirect(url_for("account_bp.login"))
+        else:
+            flash('Could not update password.', 'error')
+            return render_template("account/change_password.html", form=form)
 
     return render_template("account/change_password.html", form=form)

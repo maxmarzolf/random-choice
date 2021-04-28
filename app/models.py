@@ -39,6 +39,9 @@ class User(db.Model, UserMixin):
         if bcrypt.check_password_hash(user.password, old_password):
             cls.query.filter_by(id=user_id).update({"password": cls._create_new_password(new_password)})
             db.session.commit()
+            return True
+        else:
+            return False
 
     @classmethod
     def create_new_user(cls, user_email, user_password_plaintext):
