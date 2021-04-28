@@ -61,6 +61,21 @@ input {
     border: 2px solid #242423;
 }
 
+textarea {
+    height: 2rem;
+    margin: .3rem 0 .8rem 0;
+    padding: .3rem;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid #242423;
+}
+
 /* BUTTONS */
 
 button {

@@ -28,35 +28,41 @@ def signup():
 
 @account_bp.route("/login", methods=["GET", "POST"])
 def login():
+    # immediately bypass this logic if the user is authenticated
+    if current_user.is_authenticated:
+            return redirect(url_for("creator_bp.home"))
+
     form = account_forms.LoginForm()
 
     if form.validate_on_submit():
-        if current_user.is_authenticated:
-            return redirect(url_for("creator_bp.home"))
-
+        print('validated form')
         user = models.User.get_user_by_email(form.email.data)
 
-        if user and user.verify_password(user.id, form.password.data):
-            login_user(user, duration=timedelta(minutes=1), remember=True)
-            print('PASSWORD VERIFIED')
-            print(session)
+        if user and user.verify_password(user.id, form.password.data) == True:
+            login_user(user, remember=False)
 
-            if "next" in session:
-                next_url = session["next"]
-                session.pop("next")
-                session.modified = True
-                print("next in session")
-                print(session)
-                if is_safe_url(next_url):
-                    print("url is safe")
-                    print(next_url)
-                    return redirect(next_url)
-                else:
-                    print("url is not safe")
-                    return redirect(url_for("creator_bp.home"))
+            next_url = request.args.get('next')
+            if next_url and is_safe_url(next_url):
+                return redirect(next_url)
             else:
-                print("next is not in session")
-                return redirect(url_for("creator_bp.home"))
+                return redirect(url_for('creator_bp.home'))
+
+            # if "next" in session:
+            #     next_url = session["next"]
+            #     session.pop("next")
+            #     session.modified = True
+            #     print("next in session")
+            #     print(session)
+            #     if is_safe_url(next_url):
+            #         print("url is safe")
+            #         print(next_url)
+            #         return redirect(next_url)
+            #     else:
+            #         print("url is not safe")
+            #         return redirect(url_for("creator_bp.home"))
+            # else:
+            #     print("next is not in session")
+            #     return redirect(url_for("creator_bp.home"))
         else:
             flash("Please enter a valid user name and password.")
 
@@ -95,9 +101,14 @@ def change_password():
     form = account_forms.ChangePasswordForm()
 
     if form.validate_on_submit():
-        models.User.update_password(user_id=current_user.id, old_password=form.old_password.data,
+        updated_password = models.User.update_password(user_id=current_user.id, old_password=form.old_password.data,
                                     new_password=form.new_password.data)
+        if updated_password == True:
+            logout_user()
 
-        return redirect(url_for("creator_bp.home"))
+            return redirect(url_for("account_bp.login"))
+        else:
+            flash('Could not update password.', 'error')
+            return render_template("account/change_password.html", form=form)
 
     return render_template("account/change_password.html", form=form)
