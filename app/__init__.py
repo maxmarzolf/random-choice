@@ -30,8 +30,9 @@ def create_app():
     bcrypt.init_app(app)
     login_manager.init_app(app)
 
+    login_manager.session_protection = "basic"
     login_manager.login_view = "account_bp.login"
-    login_manager.login_message = "Please login"
+    #login_manager.login_message = "Please login"
     login_manager.refresh_view = "account_bp.login"
     login_manager.needs_refresh_message = "You need to login again to access this page."
 
