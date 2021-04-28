@@ -28,35 +28,42 @@ def signup():
 
 @account_bp.route("/login", methods=["GET", "POST"])
 def login():
+    # immediately bypass this logic if the user is authenticated
+    if current_user.is_authenticated:
+            return redirect(url_for("creator_bp.home"))
+
     form = account_forms.LoginForm()
 
     if form.validate_on_submit():
-        if current_user.is_authenticated:
-            return redirect(url_for("creator_bp.home"))
-
         user = models.User.get_user_by_email(form.email.data)
 
         if user and user.verify_password(user.id, form.password.data):
-            login_user(user, duration=timedelta(minutes=1), remember=True)
+            login_user(user, remember=False)
             print('PASSWORD VERIFIED')
             print(session)
 
-            if "next" in session:
-                next_url = session["next"]
-                session.pop("next")
-                session.modified = True
-                print("next in session")
-                print(session)
-                if is_safe_url(next_url):
-                    print("url is safe")
-                    print(next_url)
-                    return redirect(next_url)
-                else:
-                    print("url is not safe")
-                    return redirect(url_for("creator_bp.home"))
+            next_url = request.args.get('next')
+            if next_url and is_safe_url(next_url):
+                return redirect(next_url)
             else:
-                print("next is not in session")
-                return redirect(url_for("creator_bp.home"))
+                return redirect(url_for('creator_bp.home'))
+
+            # if "next" in session:
+            #     next_url = session["next"]
+            #     session.pop("next")
+            #     session.modified = True
+            #     print("next in session")
+            #     print(session)
+            #     if is_safe_url(next_url):
+            #         print("url is safe")
+            #         print(next_url)
+            #         return redirect(next_url)
+            #     else:
+            #         print("url is not safe")
+            #         return redirect(url_for("creator_bp.home"))
+            # else:
+            #     print("next is not in session")
+            #     return redirect(url_for("creator_bp.home"))
         else:
             flash("Please enter a valid user name and password.")
 
