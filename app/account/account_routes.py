@@ -81,7 +81,6 @@ def logout():
 @login_required
 def manage_account():
     user_data = {"about": current_user.about, "website": current_user.personal_website, "name": current_user.name}
-    print(session)
     form = account_forms.UserManagementForm(data=user_data)
 
     if request.method == "POST":
